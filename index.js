@@ -4,21 +4,24 @@ const app = express();
 app.use(express.json());
 
 
-// Static Data
+////////// Static Data
 let students = [
-    { id: 1, name: "vijay", class: "10th", age: 15 },
+    { id: 1, name: "vijay", class: "10th", age: 1 },
     { id: 2, name: "guriya", class: "9th", age: 14 },
-    { id: 3, name: "Priya", class: "10th", age: 15 }
+    { id: 3, name: "Priya", class: "10th", age: 15 },
+    { id: 4, name: "prince", class: "12th", age: 19 },
+    { id: 5, name: "raman", class: "10th", age: 17 },
+    { id: 6, name: "suman", class: "12th", age: 8 }
 ];
 
 
-// ✅ GET All Students
+/////// GET All Students
 app.get("/students", (req, res) => {
     res.json(students);
 });
 
 
-// ✅ GET Single Student By ID
+//////// GET Single Student By ID
 app.get("/students/:id", (req, res) => {
 
     const id = parseInt(req.params.id);
@@ -33,7 +36,7 @@ app.get("/students/:id", (req, res) => {
 });
 
 
-// ✅ POST (Add Student)
+//////// POST (Add Student)
 app.post("/students", (req, res) => {
 
     const newStudent = {
@@ -44,12 +47,16 @@ app.post("/students", (req, res) => {
     };
 
     students.push(newStudent);
-    res.json(newStudent);
+
+    res.json({
+        message: "Student added successfully",
+        data: newStudent
+    });
 
 });
 
 
-// ✅ PUT (Update Student)
+/////// PUT (Update Student)
 app.put("/students/:id", (req, res) => {
 
     const id = parseInt(req.params.id);
@@ -68,7 +75,7 @@ app.put("/students/:id", (req, res) => {
 });
 
 
-// ✅ DELETE Student
+///////// DELETE Student
 app.delete("/students/:id", (req, res) => {
 
     const id = parseInt(req.params.id);
@@ -80,7 +87,7 @@ app.delete("/students/:id", (req, res) => {
 });
 
 
-// Server Start
+//////// Server Start
 app.listen(4000, () => {
     console.log("Server running on port 4000");
 });
